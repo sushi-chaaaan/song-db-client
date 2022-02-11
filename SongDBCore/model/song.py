@@ -1,6 +1,6 @@
 from typing import Any, Union
 
-from SongDB.model.history import History
+from SongDBCore.model.history import History
 
 
 class Song:

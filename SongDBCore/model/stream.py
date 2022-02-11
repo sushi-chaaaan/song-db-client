@@ -1,5 +1,5 @@
 from typing import Any, Union
-from SongDB.model.song import Song
+from SongDBCore.model.song import Song
 
 
 class Stream:
