@@ -1,7 +1,6 @@
 from SongDBCore.client import *
 from SongDBCore.http import *
-import SongDBCore.model.artist
-import SongDBCore.model.history
-import SongDBCore.model.no_recent
-import SongDBCore.model.song
-import SongDBCore.model.stream
+from SongDBCore.model.artist import *
+from SongDBCore.model.history import *
+from SongDBCore.model.song import *
+from SongDBCore.model.stream import *
