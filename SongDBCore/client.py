@@ -1,8 +1,8 @@
-from SongDB.http import SongDBHttpClient
-from SongDB.model.artist import Artist
-from SongDB.model.no_recent import No_Recent
-from SongDB.model.song import Song
-from SongDB.model.stream import Stream
+from SongDBCore.http import SongDBHttpClient
+from SongDBCore.model.artist import Artist
+from SongDBCore.model.no_recent import No_Recent
+from SongDBCore.model.song import Song
+from SongDBCore.model.stream import Stream
 
 
 class SongDBClient(SongDBHttpClient):
