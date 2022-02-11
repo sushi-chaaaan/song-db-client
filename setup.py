@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="song-db-client",
+    name="SongDBCore",
     version="0.1.0",
     author="sushi-chaaaan",
     author_email="sushi_code@outlook.jp",
