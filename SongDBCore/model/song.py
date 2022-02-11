@@ -4,12 +4,9 @@ from SongDBCore.model.history import History
 
 
 class Song:
-    def __init__(self, response: Any) -> None:
-        """An object that represents a song.
+    """An object that represents a song."""
 
-        Args:
-            response (Any): A response from spreadsheet.
-        """
+    def __init__(self, response: Any) -> None:
         self._response = response
         pass
 

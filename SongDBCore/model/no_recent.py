@@ -3,12 +3,9 @@ from SongDBCore.model.song import Song
 
 
 class No_Recent:
-    def __init__(self, response: Any) -> None:
-        """An object that has a list of the songs that has not been sung recently.
+    """An object that has a list of the songs that has not been sung recently."""
 
-        Args:
-            response (Any): A response from spreadsheet.
-        """
+    def __init__(self, response: Any) -> None:
         self._response = response
         pass
 

@@ -3,12 +3,9 @@ from SongDBCore.model.song import Song
 
 
 class Artist:
-    def __init__(self, response: Any) -> None:
-        """A Object that has a list of the song related to a specific artist.
+    """A Object that has a list of the song related to a specific artist."""
 
-        Args:
-            response (Any): A response from spreadsheet.
-        """
+    def __init__(self, response: Any) -> None:
         self._response = response
         pass
 
