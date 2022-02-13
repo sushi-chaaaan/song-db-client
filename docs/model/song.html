@@ -26,12 +26,12 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from typing import Any, Union
+<pre><code class="python">from typing import Any
 
 from SongDBCore.model.history import History
 
 
-class Song:
+class Song:  # ひきすう:song.jsonのりすと
     &#34;&#34;&#34;An object that represents a song.&#34;&#34;&#34;
 
     def __init__(self, response: Any) -&gt; None:
@@ -45,7 +45,7 @@ class Song:
         Returns:
             str: the song&#39;s title
         &#34;&#34;&#34;
-        return self._response
+        return self._response[&#34;title&#34;]
 
     @property
     def artist(self) -&gt; str:
@@ -55,26 +55,26 @@ class Song:
         Returns:
             str: the song&#39;s artist&#39;s name or composer&#39;s name
         &#34;&#34;&#34;
-        return self._response
+        return self._response[&#34;artist&#34;]
 
     @property
-    def history(self) -&gt; Union[History, list[History]]:
+    def history(self) -&gt; list[History]:
         &#34;&#34;&#34;A history of the song.
         it contains when the song was sang and that links to youtube.
 
         Returns:
             Union[History, list[History]]: Contains the date and the link tou youtube.
         &#34;&#34;&#34;
-        return self._response
+        return [History(history) for history in self._response(&#34;history&#34;)]
 
     @property
-    def latest_date(self) -&gt; str:
+    def latest(self) -&gt; History:
         &#34;&#34;&#34;A date that the song was sung most recently.
 
         Returns:
             str: A date
         &#34;&#34;&#34;
-        return self._response</code></pre>
+        return History(self._response(&#34;history&#34;)[0])</code></pre>
 </details>
 </section>
 <section>
@@ -96,7 +96,7 @@ class Song:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Song:
+<pre><code class="python">class Song:  # ひきすう:song.jsonのりすと
     &#34;&#34;&#34;An object that represents a song.&#34;&#34;&#34;
 
     def __init__(self, response: Any) -&gt; None:
@@ -110,7 +110,7 @@ class Song:
         Returns:
             str: the song&#39;s title
         &#34;&#34;&#34;
-        return self._response
+        return self._response[&#34;title&#34;]
 
     @property
     def artist(self) -&gt; str:
@@ -120,26 +120,26 @@ class Song:
         Returns:
             str: the song&#39;s artist&#39;s name or composer&#39;s name
         &#34;&#34;&#34;
-        return self._response
+        return self._response[&#34;artist&#34;]
 
     @property
-    def history(self) -&gt; Union[History, list[History]]:
+    def history(self) -&gt; list[History]:
         &#34;&#34;&#34;A history of the song.
         it contains when the song was sang and that links to youtube.
 
         Returns:
             Union[History, list[History]]: Contains the date and the link tou youtube.
         &#34;&#34;&#34;
-        return self._response
+        return [History(history) for history in self._response(&#34;history&#34;)]
 
     @property
-    def latest_date(self) -&gt; str:
+    def latest(self) -&gt; History:
         &#34;&#34;&#34;A date that the song was sung most recently.
 
         Returns:
             str: A date
         &#34;&#34;&#34;
-        return self._response</code></pre>
+        return History(self._response(&#34;history&#34;)[0])</code></pre>
 </details>
 <h3>Instance variables</h3>
 <dl>
@@ -164,10 +164,10 @@ def artist(self) -&gt; str:
     Returns:
         str: the song&#39;s artist&#39;s name or composer&#39;s name
     &#34;&#34;&#34;
-    return self._response</code></pre>
+    return self._response[&#34;artist&#34;]</code></pre>
 </details>
 </dd>
-<dt id="SongDBCore.model.song.Song.history"><code class="name">var <span class="ident">history</span> : Union[<a title="SongDBCore.model.history.History" href="history.html#SongDBCore.model.history.History">History</a>, list[<a title="SongDBCore.model.history.History" href="history.html#SongDBCore.model.history.History">History</a>]]</code></dt>
+<dt id="SongDBCore.model.song.Song.history"><code class="name">var <span class="ident">history</span> : list[<a title="SongDBCore.model.history.History" href="history.html#SongDBCore.model.history.History">History</a>]</code></dt>
 <dd>
 <div class="desc"><p>A history of the song.
 it contains when the song was sang and that links to youtube.</p>
@@ -181,17 +181,17 @@ it contains when the song was sang and that links to youtube.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def history(self) -&gt; Union[History, list[History]]:
+def history(self) -&gt; list[History]:
     &#34;&#34;&#34;A history of the song.
     it contains when the song was sang and that links to youtube.
 
     Returns:
         Union[History, list[History]]: Contains the date and the link tou youtube.
     &#34;&#34;&#34;
-    return self._response</code></pre>
+    return [History(history) for history in self._response(&#34;history&#34;)]</code></pre>
 </details>
 </dd>
-<dt id="SongDBCore.model.song.Song.latest_date"><code class="name">var <span class="ident">latest_date</span> : str</code></dt>
+<dt id="SongDBCore.model.song.Song.latest"><code class="name">var <span class="ident">latest</span> : <a title="SongDBCore.model.history.History" href="history.html#SongDBCore.model.history.History">History</a></code></dt>
 <dd>
 <div class="desc"><p>A date that the song was sung most recently.</p>
 <h2 id="returns">Returns</h2>
@@ -204,13 +204,13 @@ def history(self) -&gt; Union[History, list[History]]:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">@property
-def latest_date(self) -&gt; str:
+def latest(self) -&gt; History:
     &#34;&#34;&#34;A date that the song was sung most recently.
 
     Returns:
         str: A date
     &#34;&#34;&#34;
-    return self._response</code></pre>
+    return History(self._response(&#34;history&#34;)[0])</code></pre>
 </details>
 </dd>
 <dt id="SongDBCore.model.song.Song.title"><code class="name">var <span class="ident">title</span> : str</code></dt>
@@ -232,7 +232,7 @@ def title(self) -&gt; str:
     Returns:
         str: the song&#39;s title
     &#34;&#34;&#34;
-    return self._response</code></pre>
+    return self._response[&#34;title&#34;]</code></pre>
 </details>
 </dd>
 </dl>
@@ -258,7 +258,7 @@ def title(self) -&gt; str:
 <ul class="">
 <li><code><a title="SongDBCore.model.song.Song.artist" href="#SongDBCore.model.song.Song.artist">artist</a></code></li>
 <li><code><a title="SongDBCore.model.song.Song.history" href="#SongDBCore.model.song.Song.history">history</a></code></li>
-<li><code><a title="SongDBCore.model.song.Song.latest_date" href="#SongDBCore.model.song.Song.latest_date">latest_date</a></code></li>
+<li><code><a title="SongDBCore.model.song.Song.latest" href="#SongDBCore.model.song.Song.latest">latest</a></code></li>
 <li><code><a title="SongDBCore.model.song.Song.title" href="#SongDBCore.model.song.Song.title">title</a></code></li>
 </ul>
 </li>

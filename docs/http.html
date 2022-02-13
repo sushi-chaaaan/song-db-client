@@ -27,19 +27,25 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">from typing import Any
+
 import requests
+
+from SongDBCore.error import DBAccessError
 
 
 class SongDBHttpClient:
-    BASE_URL = &#34;&#34;
-
     def __init__(self) -&gt; None:
         pass
 
-    async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any:
-        url = self.BASE_URL + endpoint
-        result: requests.Response = requests.post(url)
-        return result
+    async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any | dict:
+        BASE_URL = &#34;https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec&#34;
+        url = BASE_URL + endpoint
+        print(url)
+        result: requests.Response = requests.get(url)
+        if result.json().get(&#34;status&#34;) == &#34;ng&#34;:
+            raise DBAccessError
+        else:
+            return result.json()
 
     async def _search_by_song(self, *, song_name: str) -&gt; Any:
         return await self.request(endpoint=f&#34;?title={song_name}&#34;)
@@ -48,7 +54,7 @@ class SongDBHttpClient:
         return await self.request(endpoint=f&#34;?artist={artist_name}&#34;)
 
     async def _search_by_stream(self, *, stream_id: str) -&gt; Any:
-        return await self.request(endpoint=f&#34;?stream={stream_id}&#34;)
+        return await self.request(endpoint=f&#34;?url={stream_id}&#34;)
 
     async def _search_no_recent_song(self) -&gt; Any:
         return await self.request(endpoint=&#34;?recent&#34;)</code></pre>
@@ -73,15 +79,18 @@ class SongDBHttpClient:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class SongDBHttpClient:
-    BASE_URL = &#34;&#34;
-
     def __init__(self) -&gt; None:
         pass
 
-    async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any:
-        url = self.BASE_URL + endpoint
-        result: requests.Response = requests.post(url)
-        return result
+    async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any | dict:
+        BASE_URL = &#34;https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec&#34;
+        url = BASE_URL + endpoint
+        print(url)
+        result: requests.Response = requests.get(url)
+        if result.json().get(&#34;status&#34;) == &#34;ng&#34;:
+            raise DBAccessError
+        else:
+            return result.json()
 
     async def _search_by_song(self, *, song_name: str) -&gt; Any:
         return await self.request(endpoint=f&#34;?title={song_name}&#34;)
@@ -90,7 +99,7 @@ class SongDBHttpClient:
         return await self.request(endpoint=f&#34;?artist={artist_name}&#34;)
 
     async def _search_by_stream(self, *, stream_id: str) -&gt; Any:
-        return await self.request(endpoint=f&#34;?stream={stream_id}&#34;)
+        return await self.request(endpoint=f&#34;?url={stream_id}&#34;)
 
     async def _search_no_recent_song(self) -&gt; Any:
         return await self.request(endpoint=&#34;?recent&#34;)</code></pre>
@@ -99,17 +108,10 @@ class SongDBHttpClient:
 <ul class="hlist">
 <li><a title="SongDBCore.client.SongDBClient" href="client.html#SongDBCore.client.SongDBClient">SongDBClient</a></li>
 </ul>
-<h3>Class variables</h3>
-<dl>
-<dt id="SongDBCore.http.SongDBHttpClient.BASE_URL"><code class="name">var <span class="ident">BASE_URL</span></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
 <h3>Methods</h3>
 <dl>
 <dt id="SongDBCore.http.SongDBHttpClient.request"><code class="name flex">
-<span>async def <span class="ident">request</span></span>(<span>self, *, endpoint: str, **kwargs: Any) ‑> Any</span>
+<span>async def <span class="ident">request</span></span>(<span>self, *, endpoint: str, **kwargs: Any) ‑> Union[Any, dict]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -117,10 +119,15 @@ class SongDBHttpClient:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any:
-    url = self.BASE_URL + endpoint
-    result: requests.Response = requests.post(url)
-    return result</code></pre>
+<pre><code class="python">async def request(self, *, endpoint: str, **kwargs: Any) -&gt; Any | dict:
+    BASE_URL = &#34;https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec&#34;
+    url = BASE_URL + endpoint
+    print(url)
+    result: requests.Response = requests.get(url)
+    if result.json().get(&#34;status&#34;) == &#34;ng&#34;:
+        raise DBAccessError
+    else:
+        return result.json()</code></pre>
 </details>
 </dd>
 </dl>
@@ -144,7 +151,6 @@ class SongDBHttpClient:
 <li>
 <h4><code><a title="SongDBCore.http.SongDBHttpClient" href="#SongDBCore.http.SongDBHttpClient">SongDBHttpClient</a></code></h4>
 <ul class="">
-<li><code><a title="SongDBCore.http.SongDBHttpClient.BASE_URL" href="#SongDBCore.http.SongDBHttpClient.BASE_URL">BASE_URL</a></code></li>
 <li><code><a title="SongDBCore.http.SongDBHttpClient.request" href="#SongDBCore.http.SongDBHttpClient.request">request</a></code></li>
 </ul>
 </li>
