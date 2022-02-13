@@ -1,3 +1,5 @@
+from typing import Optional
+
 from SongDBCore.http import SongDBHttpClient
 from SongDBCore.model.artist import Artist
 from SongDBCore.model.no_recent import No_Recent
@@ -6,8 +8,8 @@ from SongDBCore.model.stream import Stream
 
 
 class SongDBClient(SongDBHttpClient):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, url: Optional[str]) -> None:
+        super().__init__(url=url)
 
     async def search_artist(self, *, artist_name: str) -> Artist:
         return Artist(await self._search_by_artist(artist_name=artist_name))
