@@ -10,10 +10,10 @@ class Stream:
         pass
 
     @property
-    def songs(self) -> Union[Song, list[Song]]:
+    def songs(self) -> list[Song]:
         """A list of the songs related to a specific stream.
 
         Returns:
             list[Song]: A list of object that representing a song.
         """
-        return self._response
+        return [Song(song) for song in self._response["result"]]
