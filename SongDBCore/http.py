@@ -10,7 +10,7 @@ class SongDBHttpClient:
         pass
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
-        BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
+        BASE_URL = "https://script.google.com/macros/s/AKfycbz_4ITm8ybnl7yLT0bmcGQoPHg3hGDAU38u6Q809dBhqS8-GZqnxTrWSqDKwAlZPuFi/exec"
         url = BASE_URL + endpoint
         print(url)
         result: requests.Response = requests.get(url)
