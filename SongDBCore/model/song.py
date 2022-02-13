@@ -35,15 +35,15 @@ class Song:  # ひきすう:song.jsonのりすと
         it contains when the song was sang and that links to youtube.
 
         Returns:
-            Union[History, list[History]]: Contains the date and the link tou youtube.
+            list[History]: Contains the date and the link tou youtube.
         """
         return [History(history) for history in self._response("history")]
 
     @property
     def latest(self) -> History:
-        """A date that the song was sung most recently.
+        """A history object that the song was sung most recently.
 
         Returns:
-            str: A date
+            History
         """
         return History(self._response("history")[0])

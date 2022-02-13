@@ -13,7 +13,7 @@ class History:  # ひきすう:history.json
         """
         A date that the song is sang.
         Returns:
-            str: [description]
+            str: yyyy/mm/dd
         """
         return self._response["date"]
 
@@ -29,10 +29,10 @@ class History:  # ひきすう:history.json
 
     @property
     def url(self) -> str:
-        """[summary]
+        """
         A link that the song had begun singing.
 
         Returns:
-            str: [description]youtube link like youtu.be/xxxx
+            str: youtube link like youtu.be/xxxx
         """
         return self._response["url"]
