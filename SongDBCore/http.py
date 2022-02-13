@@ -1,8 +1,8 @@
 from typing import Any
-import requests
-from SongDBCore.error import DBAccessError
 
-BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
+import requests
+
+from SongDBCore.error import DBAccessError
 
 
 class SongDBHttpClient:
@@ -10,6 +10,7 @@ class SongDBHttpClient:
         pass
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
+        BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
         url = BASE_URL + endpoint
         print(url)
         result: requests.Response = requests.post(url)
