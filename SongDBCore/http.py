@@ -13,7 +13,7 @@ class SongDBHttpClient:
         BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
         url = BASE_URL + endpoint
         print(url)
-        result: requests.Response = requests.post(url)
+        result: requests.Response = requests.get(url)
         if result.json().get("status") == "ng":
             raise DBAccessError
         else:
