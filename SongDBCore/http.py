@@ -1,4 +1,3 @@
-import re
 from typing import Any
 import requests
 from SongDBCore.error import DBAccessError
@@ -12,6 +11,7 @@ class SongDBHttpClient:
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
         url = BASE_URL + endpoint
+        print(url)
         result: requests.Response = requests.post(url)
         if result.json().get("status") == "ng":
             raise DBAccessError
