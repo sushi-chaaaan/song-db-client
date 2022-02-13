@@ -51,7 +51,7 @@ class Song:  # ひきすう:song.jsonのりすと
 
 class RawSong(Song):
     def __init__(self, response: Any) -> None:
-        self.result = response
+        self._response = response
 
     @property
     def songs(self) -> list[Song]:
