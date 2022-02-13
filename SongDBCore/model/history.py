@@ -1,7 +1,7 @@
 from typing import Any
 
 
-class History:
+class History:  # ひきすう:history.json
     """An object that represents a history of the song."""
 
     def __init__(self, response: Any) -> None:
@@ -9,20 +9,30 @@ class History:
         pass
 
     @property
-    def date(self) -> str:
+    def date(self) -> str:  # 2022/02/02
         """
         A date that the song is sang.
         Returns:
             str: [description]
         """
-        return self._response
+        return self._response["date"]
 
     @property
-    def href(self) -> str:
+    def note(self) -> str:
+        """
+        A note that the song has.
+
+        Returns:
+            str: A note
+        """
+        return self._response["note"]
+
+    @property
+    def url(self) -> str:
         """[summary]
         A link that the song had begun singing.
 
         Returns:
             str: [description]youtube link like youtu.be/xxxx
         """
-        return self._response
+        return self._response["url"]

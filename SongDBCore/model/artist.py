@@ -1,8 +1,8 @@
-from typing import Any, Union
+from typing import Any
 from SongDBCore.model.song import Song
 
 
-class Artist:
+class Artist:  # 引数:じしょ
     """A Object that has a list of the song related to a specific artist."""
 
     def __init__(self, response: Any) -> None:
@@ -10,10 +10,10 @@ class Artist:
         pass
 
     @property
-    def songs(self) -> Union[Song, list[Song]]:
+    def songs(self) -> list[Song]:
         """A list of the song related to a specific artist.
 
         Returns:
             list[Song]: A list contains each song's title and so on.
         """
-        return self._response
+        return [Song(song) for song in self._response["result"]]
