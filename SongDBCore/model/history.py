@@ -1,4 +1,8 @@
+import re
 from typing import Any
+
+remove_pre = re.compile(r"^[\S]*youtu.be/")
+remove_suf = re.compile(r"\?t=[\d]*")
 
 
 class History:  # ひきすう:history.json
@@ -36,3 +40,14 @@ class History:  # ひきすう:history.json
             str: youtube link like youtu.be/xxxx
         """
         return self._response["url"]
+
+    @property
+    def raw_id(self) -> str:
+        """A raw video id of youtube videos in this history.
+
+        Returns:
+            str: VideoId
+        """
+        raw_id = remove_pre.sub("", self._response["url"])  # 3aMJcqIu-EI?t=2700
+        id = remove_suf.sub("", raw_id)  # 3aMJcqIu-EI
+        return id
