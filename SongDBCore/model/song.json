@@ -1,11 +1,15 @@
 {
-    title: "アニマル",
-    aritst: "DECO*27",
-    history: [
+    "title": "ヴァンパイア",
+    "artist": "DECO*27",
+    "history": [
         {
-    url: "https://youtu.be/s-wDgxGCj4g",
-    date: "2022/02/02",
-    note: "歌ってみた"
+            "url": "https://youtu.be/lHlmqbIXMPU?t=2866",
+            "date": "2021/12/01",
+            "note": "1回目は失敗"
+        },
+        {
+            "url": "https://youtu.be/YcYwE6wgA8k?t=782",
+            "date": "2021/12/04",
+            "note": ""
         }
     ]
-},

@@ -22,8 +22,7 @@ class SongDBHttpClient:
             return result.json()
 
     async def _search_by_song(self, *, song_name: str) -> Any:
-        song = await self.request(endpoint=f"?title={song_name}")
-        return song["result"]
+        return await self.request(endpoint=f"?title={song_name}")
 
     async def _search_by_artist(self, *, artist_name: str) -> Any:
         return await self.request(endpoint=f"?artist={artist_name}")

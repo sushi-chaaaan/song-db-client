@@ -47,3 +47,9 @@ class Song:  # ひきすう:song.jsonのりすと
             History
         """
         return History(self._response["history"][0])
+
+
+class RawSong(Song):
+    def __init__(self, response: Any) -> None:
+        self._response = response
+        super().__init__(response=self._response["result"][0])
