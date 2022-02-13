@@ -37,7 +37,7 @@ class Song:  # ひきすう:song.jsonのりすと
         Returns:
             list[History]: Contains the date and the link tou youtube.
         """
-        return [History(history) for history in self._response("history")]
+        return [History(history) for history in self._response["history"]]
 
     @property
     def latest(self) -> History:
