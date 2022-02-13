@@ -3,15 +3,15 @@ from typing import Any
 import requests
 from SongDBCore.error import DBAccessError
 
+BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
+
 
 class SongDBHttpClient:
-    BASE_URL = "https://script.google.com/macros/s/AKfycby8mvvmnNO3tQRsqM47A-Rh61zlgYpzUt40mLDKXuiwU2agS-KkeQheX3dwxOq7aZA/exec"
-
     def __init__(self) -> None:
         pass
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
-        url = self.BASE_URL + endpoint
+        url = BASE_URL + endpoint
         result: requests.Response = requests.post(url)
         if result.json().get("status") == "ng":
             raise DBAccessError

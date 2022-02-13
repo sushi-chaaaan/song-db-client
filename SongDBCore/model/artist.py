@@ -2,7 +2,7 @@ from typing import Any
 from SongDBCore.model.song import Song
 
 
-class Artist:  # 引数:じしょ
+class Artist:  # 引数:artist.json
     """A Object that has a list of the song related to a specific artist."""
 
     def __init__(self, response: Any) -> None:
