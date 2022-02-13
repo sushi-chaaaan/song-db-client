@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 import requests
 
@@ -6,14 +6,16 @@ from SongDBCore.error import DBAccessError
 
 
 class SongDBHttpClient:
-    def __init__(self) -> None:
+    def __init__(self, url: Optional[str]) -> None:
+        self.base_url = url
         pass
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
-        BASE_URL = "https://script.google.com/macros/s/AKfycbz_4ITm8ybnl7yLT0bmcGQoPHg3hGDAU38u6Q809dBhqS8-GZqnxTrWSqDKwAlZPuFi/exec"
-        url = BASE_URL + endpoint
-        print(url)
-        result: requests.Response = requests.get(url)
+        if not self.base_url:
+            self.base_url = "https://script.google.com/macros/s/AKfycbz_4ITm8ybnl7yLT0bmcGQoPHg3hGDAU38u6Q809dBhqS8-GZqnxTrWSqDKwAlZPuFi/exec"
+        req_url = self.base_url + endpoint
+        print(req_url)
+        result: requests.Response = requests.get(req_url)
         if result.json().get("status") == "ng":
             raise DBAccessError
         else:
