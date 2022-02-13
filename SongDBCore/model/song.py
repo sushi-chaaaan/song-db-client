@@ -40,10 +40,10 @@ class Song:  # ひきすう:song.jsonのりすと
         return [History(history) for history in self._response("history")]
 
     @property
-    def latest_date(self) -> str:
+    def latest(self) -> History:
         """A date that the song was sung most recently.
 
         Returns:
             str: A date
         """
-        return History(self._response("history")[0]).date
+        return History(self._response("history")[0])
