@@ -46,4 +46,4 @@ class Song:  # ひきすう:song.jsonのりすと
         Returns:
             History
         """
-        return History(self._response("history")[0])
+        return History(self._response["history"][0])
