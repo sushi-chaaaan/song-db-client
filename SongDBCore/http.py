@@ -1,4 +1,3 @@
-from inspect import EndOfBlock
 from typing import Any, Optional
 
 import requests

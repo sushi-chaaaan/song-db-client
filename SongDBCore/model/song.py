@@ -56,3 +56,7 @@ class RawSong(Song):
     @property
     def songs(self) -> list[Song]:
         return [Song(song) for song in self._response["result"]]
+
+    @property
+    def raw(self) -> Any:
+        return self._response
