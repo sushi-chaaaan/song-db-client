@@ -1,3 +1,4 @@
+from inspect import EndOfBlock
 from typing import Any, Optional
 
 import requests
@@ -32,3 +33,23 @@ class SongDBHttpClient:
 
     async def _search_no_recent_song(self) -> Any:
         return await self.request(endpoint="?recent")
+
+    async def _multi_search(
+        self,
+        *,
+        song_name: Optional[str] = None,
+        artist_name: Optional[str] = None,
+        stream_id: Optional[str] = None,
+    ) -> Any:
+        endpoints: list[str] = []
+        if song_name:
+            endpoints.append(f"?title={song_name}")
+        if artist_name:
+            endpoints.append(f"?artist={artist_name}")
+        if stream_id:
+            endpoints.append(f"?url={stream_id}")
+        if not endpoints:
+            raise DBAccessError(reason="I need at least 1 query.")
+        else:
+            endpoint = "".join(endpoints)
+            return await self.request(endpoint=endpoint)
