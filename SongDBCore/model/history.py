@@ -1,5 +1,5 @@
 import re
-from typing import Any
+from typing import Any, Optional
 
 remove_pre = re.compile(r"^[\S]*youtu.be/")
 remove_suf = re.compile(r"\?t=[\d]*")
@@ -32,14 +32,19 @@ class History:  # ひきすう:history.json
         return self._response["note"]
 
     @property
-    def url(self) -> str:
+    def url(self) -> Optional[str]:
         """
         A link that the song had begun singing.
+        If there is no archive, this returns None.
 
         Returns:
             str: youtube link like youtu.be/xxxx
+            None: When there is no archive
         """
-        return self._response["url"]
+        if self._response["url"]:
+            return self._response["url"]
+        else:
+            return None
 
     @property
     def raw_id(self) -> str:
