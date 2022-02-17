@@ -12,7 +12,7 @@ class SongDBHttpClient:
 
     async def request(self, *, endpoint: str, **kwargs: Any) -> Any | dict:
         if not self.base_url:
-            self.base_url = "https://script.google.com/macros/s/AKfycbz_4ITm8ybnl7yLT0bmcGQoPHg3hGDAU38u6Q809dBhqS8-GZqnxTrWSqDKwAlZPuFi/exec"
+            self.base_url = "https://script.google.com/macros/s/AKfycbybEQO66Ui5AbgaPvisluBbWMqxayLM2iyPCNeipXUOvn__Jp4SQsm7X8Z4w3HQvxja/exec"
         req_url = self.base_url + endpoint
         print(req_url)
         result: requests.Response = requests.get(req_url)
@@ -32,6 +32,24 @@ class SongDBHttpClient:
 
     async def _search_no_recent_song(self) -> Any:
         return await self.request(endpoint="?recent")
+
+    async def _search_by_date(
+        self,
+        *,
+        _from: Optional[str],
+        _to: Optional[str],
+    ) -> Any:
+
+        dates = (_from, _to)
+        match dates:
+            case (_from, _to):
+                return await self.request(endpoint=f"?date_from={_from}&date_to={_to}")
+            case (_from, None):
+                return await self.request(endpoint=f"date_from={_from}")
+            case (None, _to):
+                return await self.request(endpoint=f"?date_to={_to}")
+            case (None, None):
+                raise DBAccessError(reason="Date select error.")
 
     async def _multi_search(
         self,

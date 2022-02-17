@@ -2,6 +2,7 @@ from typing import Optional
 
 from SongDBCore.http import SongDBHttpClient
 from SongDBCore.model.artist import Artist
+from SongDBCore.model.date import Date
 from SongDBCore.model.no_recent import No_Recent
 from SongDBCore.model.song import RawSong
 from SongDBCore.model.stream import Stream
@@ -16,6 +17,11 @@ class SongDBClient(SongDBHttpClient):
 
     async def search_no_recent(self) -> No_Recent:
         return No_Recent(await self._search_no_recent_song())
+
+    async def search_by_date(
+        self, _from: Optional[str] = None, _to: Optional[str] = None
+    ):
+        return Date(await self._search_by_date(_from=_from, _to=_to))
 
     async def search_song(self, *, song_name: str) -> RawSong:
         return RawSong(await self._search_by_song(song_name=song_name))
