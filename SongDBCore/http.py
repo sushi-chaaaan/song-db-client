@@ -57,6 +57,8 @@ class SongDBHttpClient:
         song_name: Optional[str] = None,
         artist_name: Optional[str] = None,
         stream_id: Optional[str] = None,
+        _from: Optional[str] = None,
+        _to: Optional[str] = None,
     ) -> Any:
         endpoints: list[str] = []  # query:?xxx=yyy&xxx=yyy&xxx=yyy
         if song_name:
@@ -65,6 +67,10 @@ class SongDBHttpClient:
             endpoints.append(f"artist={artist_name}")
         if stream_id:
             endpoints.append(f"url={stream_id}")
+        if _from:
+            endpoints.append(f"date_from={_from}")
+        if _to:
+            endpoints.append(f"date_to={_to}")
         if not endpoints:
             raise DBAccessError(reason="I need at least 1 query.")
         else:
