@@ -40,7 +40,7 @@ class SongDBHttpClient:
         _to: Optional[str],
     ) -> Any:
         dates = (_from, _to)
-        if dates[0] is not None and if date[1] is not None:
+        if dates[0] is not None and dates[1] is not None:
             return await self.request(endpoint=f"?date_from={_from}&date_to={_to}")
         elif dates[0] is not None and dates[1] is None:
             return await self.request(endpoint=f"date_from={_from}")
@@ -48,7 +48,6 @@ class SongDBHttpClient:
             return await self.request(endpoint=f"?date_to={_to}")
         else:
             raise DBAccessError(reason="Date select error.")
-
 
     async def _multi_search(
         self,
